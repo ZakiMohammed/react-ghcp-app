@@ -1,31 +1,19 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FaPlus } from 'react-icons/fa';
-import { v4 as uuid } from 'uuid';
 
 const Form = ({ add }) => {
   const [note, setNote] = useState('');
 
   const handleSubmit = event => {
-    try {
-      event.preventDefault();
+    event.preventDefault();
+    
+    const newNote = {
+      id: 1,
+      note,
+    };
 
-      if (note === '') {
-        window.alert('Please fill the form');
-        return;
-      }
-
-      const newNote = {
-        id: uuid(),
-        note,
-      };
-
-      add(newNote);
-    } catch (error) {
-      window.alert(`Error Occurred: ${error.message}`);
-    } finally {
-      setNote('');
-    }
+    add(newNote);
   };
 
   const handleNoteChange = event => {
